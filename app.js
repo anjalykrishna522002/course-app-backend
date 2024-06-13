@@ -15,6 +15,32 @@ app.post("/add", (req, res) => {
     console.log(course)
     res.json({ "status": "success" })
 })
+app.post(
+    "/search", (req, res) => {
+        let input=req.body
+        coursemodel.find(input).then(
+            (data)=>{
+                res.json(data)
+            }
+        ).catch(
+            (error)=>{
+                res.json(error)
+            }
+        )
+    }
+)
+app.post("/delete",(req,res) =>{
+    let input=req.body
+    coursemodel.findByIdAndDelete(input._id).then(
+        (response)=>{
+            res.json({"status":"success"})
+        }
+    ).catch(
+        (error)=>{
+            res.json({"status":"success"})
+        }
+    )
+})
 app.get("/view", (req, res) => {
     coursemodel.find().then(
         (data) => {
